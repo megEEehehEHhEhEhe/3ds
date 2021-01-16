@@ -1,6 +1,6 @@
 --- Made By 2ds/UntakenUser2ds (not a copy of 3ds, it just came up to my mind)
 --- This is some trash, simple old GUI I made for this game: https://www.roblox.com/games/3556282818/Exploit-Fix-Undertale-Battle-Royale
---- This GUI is very easily patched, I just wanna point out that I do not update these kinds of simple GUIs.
+--- This GUI can easily get patched, I just wanna point out that I do not update these kinds of simple GUIs.
 
 local ScreenGui = Instance.new("ScreenGui")
 local OpenFrame = Instance.new("Frame")
