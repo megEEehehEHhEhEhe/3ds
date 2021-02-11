@@ -1,0 +1,88 @@
+--- basically a suicide gui, pretty simple to make.
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local EndItButton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local RandomLabel = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
+local UICorner_4 = Instance.new("UICorner")
+local RandomLabel2 = Instance.new("TextLabel")
+local UICorner_5 = Instance.new("UICorner")
+
+--- Properties:
+
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.Active = true
+MainFrame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+MainFrame.Position = UDim2.new(0.734355032, 0, 0.64864862, 0)
+MainFrame.Size = UDim2.new(0, 382, 0, 275)
+MainFrame.Visible = true
+MainFrame.Draggable = true
+
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = MainFrame
+TitleLabel.BackgroundColor3 = Color3.fromRGB(9, 9, 9)
+TitleLabel.Position = UDim2.new(0, 0, -0.144501954, 0)
+TitleLabel.Size = UDim2.new(0, 382, 0, 52)
+TitleLabel.Font = Enum.Font.SourceSans
+TitleLabel.Text = "kill yourself gui made by not everyone#8529"
+TitleLabel.TextColor3 = Color3.fromRGB(247, 247, 247)
+TitleLabel.TextScaled = true
+TitleLabel.TextSize = 14.000
+TitleLabel.TextWrapped = true
+
+UICorner.Parent = TitleLabel
+
+EndItButton.Name = "EndItButton"
+EndItButton.Parent = MainFrame
+EndItButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+EndItButton.Position = UDim2.new(0.238219902, 0, 0.38376376, 0)
+EndItButton.Size = UDim2.new(0, 215, 0, 76)
+EndItButton.Font = Enum.Font.SourceSans
+EndItButton.Text = "end it"
+EndItButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+EndItButton.TextScaled = true
+EndItButton.TextSize = 14.000
+EndItButton.TextWrapped = true
+EndItButton.MouseButton1Down:connect(function()
+	game.Players.LocalPlayer.Character.Head:Destroy()
+end)
+
+UICorner_2.Parent = EndItButton
+
+RandomLabel.Name = "RandomLabel"
+RandomLabel.Parent = MainFrame
+RandomLabel.BackgroundColor3 = Color3.fromRGB(9, 9, 9)
+RandomLabel.BorderSizePixel = 0
+RandomLabel.Position = UDim2.new(0.256544501, 0, 0.199261993, 0)
+RandomLabel.Size = UDim2.new(0, 200, 0, 43)
+RandomLabel.Font = Enum.Font.SourceSans
+RandomLabel.Text = "goodbye."
+RandomLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+RandomLabel.TextSize = 35.000
+RandomLabel.TextWrapped = true
+
+UICorner_3.Parent = RandomLabel
+
+UICorner_4.Parent = MainFrame
+
+RandomLabel2.Name = "RandomLabel2"
+RandomLabel2.Parent = MainFrame
+RandomLabel2.BackgroundColor3 = Color3.fromRGB(9, 9, 9)
+RandomLabel2.BorderSizePixel = 0
+RandomLabel2.Position = UDim2.new(0.0209424086, 0, 0.697443843, 0)
+RandomLabel2.Size = UDim2.new(0, 367, 0, 77)
+RandomLabel2.Font = Enum.Font.SourceSans
+RandomLabel2.Text = "rip NameHere, YearHere - YearHere, he/she just couldn't take it anymore."
+RandomLabel2.TextColor3 = Color3.fromRGB(0, 0, 0)
+RandomLabel2.TextScaled = true
+RandomLabel2.TextSize = 35.000
+RandomLabel2.TextWrapped = true
+
+UICorner_5.Parent = RandomLabel2
