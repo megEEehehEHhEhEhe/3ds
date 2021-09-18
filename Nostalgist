@@ -1,0 +1,5 @@
+if game.PlaceId == 5475935012 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/UntakenUser2ds/3ds/Project-Nostalgist/CRIA", true))()
+elseif game.PlaceId == 3799042896 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/UntakenUser2ds/3ds/Project-Nostalgist/STATK", true))()
+end
