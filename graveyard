@@ -1,4 +1,3 @@
-getgenv().ShowTeam=true
 local Graveyard = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TitleL = Instance.new("TextLabel")
