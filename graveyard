@@ -1,0 +1,59 @@
+getgenv().ShowTeam=true
+local Graveyard = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TitleL = Instance.new("TextLabel")
+local DeadL = Instance.new("TextLabel")
+local r=game:service'RunService'
+
+Graveyard.Name = "Graveyard"
+Graveyard.Parent = game.CoreGui
+Graveyard.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = Graveyard
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(35, 35, 35)
+Frame.Position = UDim2.new(0.739562631, 0, 0.796327233, 0)
+Frame.Size = UDim2.new(0, 192, 0, 65)
+Frame.Active=true
+Frame.Draggable=true
+
+TitleL.Name = "TitleL"
+TitleL.Parent = Frame
+TitleL.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TitleL.BorderColor3=Color3.fromRGB(35,35,35)
+TitleL.Size = UDim2.new(0, 192, 0, 23)
+TitleL.Font = Enum.Font.SourceSans
+TitleL.Text = "Graveyard"
+TitleL.TextColor3 = Color3.fromRGB(235, 235, 235)
+TitleL.TextScaled = true
+TitleL.TextSize = 14.000
+TitleL.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
+TitleL.TextStrokeTransparency = 0.000
+TitleL.TextWrapped = true
+
+DeadL.Name = "DeadL"
+DeadL.Parent = Frame
+DeadL.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+DeadL.BackgroundTransparency = 1.000
+DeadL.Position = UDim2.new(0, 0, 0.353846192, 0)
+DeadL.Size = UDim2.new(0, 192, 0, 42)
+DeadL.Font = Enum.Font.SourceSans
+DeadL.Text = "Waiting for death to arrive..."
+DeadL.TextColor3 = Color3.fromRGB(235, 235, 235)
+DeadL.TextScaled = true
+DeadL.TextSize = 14.000
+DeadL.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
+DeadL.TextStrokeTransparency = 0.000
+DeadL.TextWrapped = true
+
+r.Heartbeat:connect(function()
+for i,v in pairs(game:service'Players':GetPlayers())do
+	local model=v.Character or v.CharacterAdded:Wait()
+
+	model.Humanoid.HealthChanged:connect(function(health)
+		if health<=0 then
+			DeadL.Text=v.Name..' has died!'
+		end
+	end)
+end
+end)
