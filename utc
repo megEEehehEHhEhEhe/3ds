@@ -1,0 +1,67 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(35, 35, 35)
+Frame.Position = UDim2.new(0.412524879, 0, 0.410385251, 0)
+Frame.Size = UDim2.new(0, 173, 0, 87)
+Frame.Active=true
+Frame.Draggable=true
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+TextBox.BorderColor3 = Color3.fromRGB(30, 30, 30)
+TextBox.Position = UDim2.new(-1.76402182e-07, 0, 0.711981416, 0)
+TextBox.Size = UDim2.new(0, 173, 0, 25)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "Rate"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(225, 225, 225)
+TextBox.TextScaled = true
+TextBox.TextSize = 14.000
+TextBox.TextWrapped = true
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(37, 37, 37)
+TextButton.BorderColor3 = Color3.fromRGB(30, 30, 30)
+TextButton.Position = UDim2.new(-1.76402182e-07, 0, 0.219700247, 0)
+TextButton.Size = UDim2.new(0, 173, 0, 42)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Farm"
+TextButton.TextColor3 = Color3.fromRGB(225, 225, 225)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextWrapped = true
+TextButton.MouseButton1Click:Connect(function()
+	local a=game:service'Players'.LocalPlayer.Character
+	b=a.HumanoidRootPart.Position
+
+	pcall(function()
+		for _, v in pairs(workspace:GetDescendants()) do
+			if v:IsA'UnionOperation'and v.Transparency==0 and v.Parent:IsA'Model'and v:FindFirstChild'Script'then
+				a:PivotTo(CFrame.new(v.Position+Vector3.new(0,.1,0)))
+				task.wait(tonumber(TextBox.Text))
+			end
+		end
+	end)
+	task.wait(.4)
+	a:PivotTo(CFrame.new(b))
+end)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TextLabel.BorderColor3 = Color3.fromRGB(30, 30, 30)
+TextLabel.Position = UDim2.new(-1.76402182e-07, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 173, 0, 19)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Drag Here"
+TextLabel.TextColor3 = Color3.fromRGB(225, 225, 225)
+TextLabel.TextSize = 18.000
+TextLabel.TextWrapped = true
