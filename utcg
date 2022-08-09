@@ -1,0 +1,64 @@
+getgenv().af=false
+local a=game:service'Players'.LocalPlayer.Character
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderColor3 = Color3.fromRGB(15, 15, 15)
+Frame.Position = UDim2.new(0.406560659, 0, 0.422110558, 0)
+Frame.Size = UDim2.new(0, 189, 0, 79)
+Frame.Active=true
+Frame.Draggable=true
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TextLabel.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TextLabel.Size = UDim2.new(0, 189, 0, 28)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Autofarm"
+TextLabel.TextColor3 = Color3.fromRGB(245, 245, 245)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextStrokeColor3 = Color3.fromRGB(20, 20, 20)
+TextLabel.TextStrokeTransparency = 0.100
+TextLabel.TextWrapped = true
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextButton.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TextButton.Position = UDim2.new(0, 0, 0.354430377, 0)
+TextButton.Size = UDim2.new(0, 187, 0, 50)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Status: OFF"
+TextButton.TextColor3 = Color3.fromRGB(245, 245, 245)
+TextButton.TextSize = 40.000
+TextButton.TextStrokeColor3 = Color3.fromRGB(20, 20, 20)
+TextButton.TextStrokeTransparency = 0.100
+TextButton.TextWrapped = true
+TextButton.MouseButton1Click:Connect(function()
+	if getgenv().af==true then
+		TextButton.Text='Status: OFF'
+		getgenv().af=false
+	elseif getgenv().af==false then
+		TextButton.Text='Status: ON'
+		getgenv().af=true
+		while getgenv().af do
+			pcall(function()
+				for _,v in pairs(workspace:GetDescendants())do
+					if v:IsA'UnionOperation'and v:FindFirstChild'Script'and v:FindFirstChildOfClass'TouchTransmitter'and v.Parent:IsA'Model'and v:FindFirstAncestorOfClass'Folder'and v.Parent.Parent:FindFirstChild'Folder'and v.Transparency==0 then
+						for x=0,1 do
+							firetouchinterest(a.Torso,v,x)
+						end
+					end
+				end
+			end)
+			task.wait(.15)
+		end
+	end
+end)
