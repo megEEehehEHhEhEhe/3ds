@@ -62,3 +62,7 @@ TextButton.MouseButton1Click:Connect(function()
 		end
 	end
 end)
+
+a.Humanoid.Died:connect(function()
+    TextLabel.Text='Player died, please re-execute the GUI.'
+end)
