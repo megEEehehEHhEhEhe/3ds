@@ -53,7 +53,7 @@ TextButton.MouseButton1Click:Connect(function()
 				for _,v in pairs(workspace:GetDescendants())do
 					if v:IsA'UnionOperation'and v:FindFirstChild'Script'and v:FindFirstChildOfClass'TouchTransmitter'and v.Parent:IsA'Model'and v:FindFirstAncestorOfClass'Folder'and v.Parent.Parent:FindFirstChild'Folder'and v.Transparency==0 then
 						for x=0,1 do
-							firetouchinterest(a.Torso,v,x)
+							firetouchinterest(a:WaitForChild'Torso',v,x)
 						end
 					end
 				end
