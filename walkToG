@@ -1,0 +1,307 @@
+getgenv().tr=false
+getgenv().vc=false
+getgenv().lp=false
+
+local ScreenGui = Instance.new("ScreenGui")
+local FRM_A = Instance.new("Frame")
+local TLBL_A = Instance.new("TextLabel")
+local TBTN_A = Instance.new("TextButton")
+local TBX_A = Instance.new("TextBox")
+local IMB_A = Instance.new("ImageButton")
+local TBTN_B = Instance.new("TextButton")
+local FRM_B = Instance.new("Frame")
+local TBTN_BA = Instance.new("TextButton")
+local TBTN_BB = Instance.new("TextButton")
+local TLBL_BA = Instance.new("TextLabel")
+local TBTN_BG = Instance.new("TextButton")
+local TBTN_BF = Instance.new("TextButton")
+
+local r=math.random(0,1)
+local t={}
+for x=1,math.random(20,30)do
+	t[x]=string.char(math.random(30,130))
+end
+
+if r==0 then
+	ScreenGui.Name=tostring(table.concat(t)):reverse()
+else
+	ScreenGui.Name=tostring(table.concat(t))
+end
+syn.protect_gui(ScreenGui)
+ScreenGui.Parent = game:service'CoreGui'
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+FRM_A.Name = "FRM_A"
+FRM_A.Parent = ScreenGui
+FRM_A.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+FRM_A.BorderColor3 = Color3.fromRGB(15, 15, 15)
+FRM_A.Position = UDim2.new(0.39690721, 0, 0.37983194, 0)
+FRM_A.Size = UDim2.new(0, 279, 0, 121)
+FRM_A.Active=true
+FRM_A.Draggable=true
+
+TLBL_A.Name = "TLBL_A"
+TLBL_A.Parent = FRM_A
+TLBL_A.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+TLBL_A.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TLBL_A.Position = UDim2.new(0.0824372768, 0, 0, 0)
+TLBL_A.Size = UDim2.new(0, 233, 0, 22)
+TLBL_A.Font = Enum.Font.SourceSans
+TLBL_A.Text = "-WalkToPart-"
+TLBL_A.TextColor3 = Color3.fromRGB(245, 245, 245)
+TLBL_A.TextScaled = true
+TLBL_A.TextSize = 14.000
+TLBL_A.TextStrokeTransparency = 0.700
+TLBL_A.TextWrapped = true
+
+TBTN_A.Name = "TBTN_A"
+TBTN_A.Parent = FRM_A
+TBTN_A.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBTN_A.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_A.Position = UDim2.new(0.182795703, 0, 0.719008267, 0)
+TBTN_A.Size = UDim2.new(0, 180, 0, 24)
+TBTN_A.Font = Enum.Font.SourceSans
+TBTN_A.Text = "WalkToPart"
+TBTN_A.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_A.TextScaled = true
+TBTN_A.TextSize = 14.000
+TBTN_A.TextStrokeTransparency = 0.700
+TBTN_A.TextWrapped = true
+TBTN_A.MouseButton1Click:Connect(function()
+	local objectname=TBX_A.Text
+	local p=game:service'Players'.LocalPlayer
+	local a=math.huge
+	local b
+
+	if vc and lp then
+		while lp do
+			for _,v in ipairs(workspace:GetDescendants())do
+				if v:IsA'BasePart'and tostring(v)==objectname and v.Transparency~=1 then
+					if p:DistanceFromCharacter(v.Position)<a then
+					    a=p:DistanceFromCharacter(v.Position)
+						b=v
+					end
+				end
+			end
+		    if b then
+				p.Character:FindFirstChildOfClass'Humanoid':MoveTo(b.Position)
+			else
+				lp=false
+				TBTN_A.Text='Part not found, loop disabled.'
+				TBTN_BG.Text='Loop WalkTo: OFF'
+		    end
+		    task.wait()
+		end
+	elseif not vc and lp then
+		while lp do
+			for _,v in ipairs(workspace:GetDescendants())do
+				if v:IsA'BasePart'and tostring(v)==objectname then
+					if p:DistanceFromCharacter(v.Position)<a then
+					    a=p:DistanceFromCharacter(v.Position)
+						b=v
+					end
+				end
+			end
+			if b then
+				p.Character:FindFirstChildOfClass'Humanoid':MoveTo(b.Position)
+			else
+				lp=false
+				TBTN_A.Text='Part not found, loop disabled.'
+				TBTN_BG.Text='Loop WalkTo: OFF'
+			end
+			task.wait()
+		end
+	else
+		for _,v in ipairs(workspace:GetDescendants())do
+			if v:IsA'BasePart'and tostring(v)==objectname then
+				if p:DistanceFromCharacter(v.Position)<a then
+					a=p:DistanceFromCharacter(v.Position)
+					b=v
+				end
+			end
+		end
+		if b then
+		    p.Character:FindFirstChildOfClass'Humanoid':MoveTo(b.Position)
+		else
+		    TBTN_A.Text='Part not found.'
+		end
+	end
+end)
+
+TBX_A.Name = "TBX_A"
+TBX_A.Parent = FRM_A
+TBX_A.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBX_A.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBX_A.Position = UDim2.new(0.143369183, 0, 0.260330498, 0)
+TBX_A.Size = UDim2.new(0, 200, 0, 50)
+TBX_A.Font = Enum.Font.SourceSans
+TBX_A.PlaceholderColor3 = Color3.fromRGB(168, 168, 168)
+TBX_A.PlaceholderText = "PART NAME HERE"
+TBX_A.Text = ""
+TBX_A.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBX_A.TextScaled = true
+TBX_A.TextSize = 14.000
+TBX_A.TextStrokeTransparency = 0.700
+TBX_A.TextWrapped = true
+TBX_A.ClearTextOnFocus=false
+
+IMB_A.Name = "IMB_A"
+IMB_A.Parent = FRM_A
+IMB_A.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+IMB_A.BorderColor3 = Color3.fromRGB(15, 15, 15)
+IMB_A.Position = UDim2.new(0.917562723, 0, 0, 0)
+IMB_A.Size = UDim2.new(0, 23, 0, 22)
+IMB_A.Image = "rbxassetid://7059346373"
+IMB_A.MouseButton1Click:Connect(function()
+	FRM_A.Visible=false
+	FRM_B.Visible=true
+end)
+
+TBTN_B.Name = "TBTN_A"
+TBTN_B.Parent = FRM_A
+TBTN_B.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBTN_B.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_B.Size = UDim2.new(0, 23, 0, 22)
+TBTN_B.Font = Enum.Font.SourceSans
+TBTN_B.Text = "TR"
+TBTN_B.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_B.TextScaled = true
+TBTN_B.TextSize = 14.000
+TBTN_B.TextStrokeTransparency = 0.700
+TBTN_B.TextWrapped = true
+TBTN_B.MouseButton1Click:Connect(function()
+	if tr then
+		tr=false
+		for _,v in ipairs(ScreenGui:GetDescendants())do
+			if v:IsA'Frame'and v.BackgroundTransparency==.5 then
+				v.BackgroundTransparency=0
+			elseif v:IsA'TextButton'or v:IsA'TextLabel'or v:IsA'TextBox'and v.BackgroundTransparency==.5 then
+				v.BackgroundTransparency,v.TextTransparency=0,0
+			elseif v:IsA'ImageButton'then
+				v.BackgroundTransparency,v.ImageTransparency=0,0
+			end
+		end
+	elseif not tr then
+		tr=true
+		for _,v in ipairs(ScreenGui:GetDescendants())do
+			if v:IsA'Frame'and v.BackgroundTransparency==0 then
+				v.BackgroundTransparency=.5
+			elseif v:IsA'TextButton'or v:IsA'TextLabel'or v:IsA'TextBox'and v.BackgroundTransparency==0 then
+				v.BackgroundTransparency,v.TextTransparency=.5,.5
+			elseif v:IsA'ImageButton'then
+				v.BackgroundTransparency,v.ImageTransparency=.5,.5
+			end
+		end
+	end
+end)
+
+FRM_B.Name = "FRM_B"
+FRM_B.Parent = ScreenGui
+FRM_B.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+FRM_B.BorderColor3 = Color3.fromRGB(15, 15, 15)
+FRM_B.Position = UDim2.new(0.39690721, 0, 0.37983194, 0)
+FRM_B.Size = UDim2.new(0, 279, 0, 121)
+FRM_B.Visible = false
+FRM_B.Active=true
+FRM_B.Draggable=true
+
+TBTN_BA.Name = "TBTN_BA"
+TBTN_BA.Parent = FRM_B
+TBTN_BA.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+TBTN_BA.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_BA.Position = UDim2.new(0.921146929, 0, 0, 0)
+TBTN_BA.Size = UDim2.new(0, 22, 0, 20)
+TBTN_BA.Font = Enum.Font.SourceSans
+TBTN_BA.Text = "X"
+TBTN_BA.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_BA.TextScaled = true
+TBTN_BA.TextSize = 14.000
+TBTN_BA.TextStrokeTransparency = 0.700
+TBTN_BA.TextWrapped = true
+TBTN_BA.MouseButton1Click:Connect(function()
+	FRM_B.Visible=false
+	FRM_A.Visible=true
+end)
+
+TBTN_BB.Name = "TBTN_BB"
+TBTN_BB.Parent = FRM_B
+TBTN_BB.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBTN_BB.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_BB.Position = UDim2.new(0, 0, 0.15702486, 0)
+TBTN_BB.Size = UDim2.new(0, 279, 0, 34)
+TBTN_BB.Font = Enum.Font.SourceSans
+TBTN_BB.Text = "Visible Check: OFF"
+TBTN_BB.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_BB.TextScaled = true
+TBTN_BB.TextSize = 14.000
+TBTN_BB.TextStrokeTransparency = 0.700
+TBTN_BB.TextWrapped = true
+TBTN_BB.MouseButton1Click:Connect(function()
+	if vc then
+		vc=false
+		TBTN_BB.Text='Visible Check: OFF'
+	elseif not vc then
+		vc=true
+		TBTN_BB.Text='Visible Check: ON'
+	end
+end)
+
+TLBL_BA.Name = "TLBL_BA"
+TLBL_BA.Parent = FRM_B
+TLBL_BA.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+TLBL_BA.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TLBL_BA.Size = UDim2.new(0, 257, 0, 19)
+TLBL_BA.Font = Enum.Font.SourceSans
+TLBL_BA.Text = "-Settings-"
+TLBL_BA.TextColor3 = Color3.fromRGB(245, 245, 245)
+TLBL_BA.TextScaled = true
+TLBL_BA.TextSize = 14.000
+TLBL_BA.TextStrokeTransparency = 0.700
+TLBL_BA.TextWrapped = true
+
+TBTN_BG.Name = "TBTN_BG"
+TBTN_BG.Parent = FRM_B
+TBTN_BG.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBTN_BG.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_BG.Position = UDim2.new(0, 0, 0.438016534, 0)
+TBTN_BG.Size = UDim2.new(0, 279, 0, 34)
+TBTN_BG.Font = Enum.Font.SourceSans
+TBTN_BG.Text = "Loop WalkTo: OFF"
+TBTN_BG.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_BG.TextScaled = true
+TBTN_BG.TextSize = 14.000
+TBTN_BG.TextStrokeTransparency = 0.700
+TBTN_BG.TextWrapped = true
+TBTN_BG.MouseButton1Click:Connect(function()
+	if lp then
+		lp=false
+		TBTN_BG.Text='Loop WalkTo: OFF'
+	elseif not lp then
+		lp=true
+		TBTN_BG.Text='Loop WalkTo: ON'
+	end
+end)
+
+TBTN_BF.Name = "TBTN_BF"
+TBTN_BF.Parent = FRM_B
+TBTN_BF.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TBTN_BF.BorderColor3 = Color3.fromRGB(15, 15, 15)
+TBTN_BF.Position = UDim2.new(0, 0, 0.719008267, 0)
+TBTN_BF.Size = UDim2.new(0, 279, 0, 34)
+TBTN_BF.Font = Enum.Font.SourceSans
+TBTN_BF.Text = "Close GUI"
+TBTN_BF.TextColor3 = Color3.fromRGB(245, 245, 245)
+TBTN_BF.TextScaled = true
+TBTN_BF.TextSize = 14.000
+TBTN_BF.TextStrokeTransparency = 0.700
+TBTN_BF.TextWrapped = true
+TBTN_BF.MouseButton1Click:Connect(function()
+	if TBTN_BF.Text~='Are you sure?'then
+		TBTN_BF.Text='Are you sure?'
+		task.wait(2)
+		TBTN_BF.Text='Close GUI'
+	else
+		tr,vc,lp=false,false,false
+		ScreenGui:Destroy()
+	end
+end)
