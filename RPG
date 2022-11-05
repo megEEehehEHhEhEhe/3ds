@@ -1,0 +1,63 @@
+local trigger='/e plr'
+
+local pl=game:service'Players'
+local function sp()
+    local id=math.random(1,999999999)
+    local a=game:service'Players'
+    local b=a.LocalPlayer.Character:FindFirstChildOfClass'Humanoid'.RootPart
+    local m=a:CreateHumanoidModelFromUserId(id)
+    m.Name=a:GetNameFromUserIdAsync(id)
+    m.Parent=workspace
+    m:PivotTo(CFrame.new(b:GetPivot()*Vector3.new(0,1,-7)))
+    m:FindFirstChildOfClass'Humanoid'.RootPart.CFrame=CFrame.lookAt(m:FindFirstChildOfClass'Humanoid'.RootPart.Position,b.Position)
+    
+    local req=syn.request({
+        Url='https://friends.roblox.com/v1/users/'..tostring(id)..'/followers/count',
+        Method='GET'
+    })
+    req.Body=req.Body:gsub('{"count":','')
+    local fol=req.Body:gsub('}','')
+    
+    local req2=syn.request({
+        Url='https://friends.roblox.com/v1/users/'..tostring(id)..'/followings/count',
+        Method='GET'
+    })
+    req2.Body=req2.Body:gsub('{"count":','')
+    local fol2=req2.Body:gsub('}','')
+    
+    local req3=syn.request({
+        Url='https://friends.roblox.com/v1/users/'..tostring(id)..'/friends/count',
+        Method='GET'
+    })
+    req3.Body=req3.Body:gsub('{"count":','')
+    local fri=req3.Body:gsub('}','')
+    
+    for _,v in ipairs(m:GetDescendants())do
+        if v:IsA'BasePart'then
+            local k=Instance.new("ClickDetector",v)
+            k.MaxActivationDistance=40
+            k.MouseClick:connect(function()
+                local msg=Instance.new("Message",game:service'CoreGui')
+                msg.Text=string.format('Username: %s\n\nUser ID: %s\n\nFriends: %s\n\nFollowers: %s\n\nFollowing: %s',tostring(m),tostring(pl:GetUserIdFromNameAsync(tostring(m))),fri,fol,fol2)
+                task.wait(3)
+                msg:Destroy()
+            end)
+        end
+    end
+end
+
+pl.LocalPlayer.Chatted:connect(function(m)
+    if m==trigger then
+        local m=Instance.new("Message",game:service'CoreGui')
+        m.Text='\\\\\Random Player Generator//\nPlease wait while we load your random player.'
+        while task.wait()do
+            local s,e=pcall(sp)
+            if e then
+                continue
+            else
+                break
+            end
+        end
+        m:Destroy()
+    end
+end)
